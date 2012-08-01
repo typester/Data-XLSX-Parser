@@ -151,6 +151,19 @@ sub _parse_rel {
     if ($cell->{ COLUMN() } > $v) {
         die sprintf 'Detected smaller index than current cell, something is wrong! (row %s): %s <> %s', $row, $v, $cell->{ COLUMN() };
     }
+
+    # add omitted cells
+    for ($cell->{ COLUMN() } .. $v-1) {
+        push @{ $self->{_current_row} }, {
+            GENERATED_CELL() => 1,
+            STYLE_IDX()      => undef,
+            TYPE()           => undef,
+            REF()            => [ $_, $row ],
+            COLUMN()         => $_,
+            VALUE()          => '',
+            FMT()            => 'unicode',
+        };
+    }
 }
 
 1;

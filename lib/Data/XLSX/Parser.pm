@@ -2,6 +2,8 @@ package Data::XLSX::Parser;
 use strict;
 use warnings;
 
+our $VERSION = '0.01';
+
 use Data::XLSX::Parser::DocumentArchive;
 use Data::XLSX::Parser::Workbook;
 use Data::XLSX::Parser::SharedStrings;
