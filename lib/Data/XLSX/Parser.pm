@@ -61,3 +61,48 @@ sub _row_event {
 }
 
 1;
+
+__END__
+
+=head1 NAME
+
+Data::XLSX::Parser - faster XLSX parser
+
+=head1 SYNOPSIS
+
+    use Data::Dumper;
+    use Data::XLSX::Parser;
+    
+    my $parser = Data::XLSX::Parser->new;
+    $parser->add_row_event_handler(sub {
+        my ($row) = @_;
+        print Dumper $row;
+    });
+    $parser->parse('foo.xlsx');
+
+=head1 DESCRIPTION
+
+Data::XLSX::Parser provides faster way to parse Microsoft Excel's .xlsx files.
+The implementation of this module is highly inspired from Python's FastXLSX library.
+
+This is SAX based parser, so you can parse very large XLSX file with lower memory usage.
+
+=head1 THIS MODULE IS *ALPHA* QUALITY
+
+This module is created for my current daily work that needs convert very huge excel file to csv, and perfectly work against my files but might not to all excel datas.
+
+If you have some XSLX files that doesn't parse this module, please bug me with the files.
+
+=head1 METHODS
+
+=head2 new
+
+Create new parser object.
+
+=head2 add
+
+=head1 AUTHOR
+
+Daisuke Murase <typester@cpan.org>
+
+=cut
