@@ -13,6 +13,7 @@ sub new {
         _data      => [],
 
         _is_string => 0,
+        _is_ph     => 0,
         _buf       => '',
     }, $class;
 
@@ -46,6 +47,7 @@ sub get {
 sub _start {
     my ($self, $parser, $name, %attrs) = @_;
     $self->{_is_string} = 1 if $name eq 'si';
+    $self->{_is_ph}     = 1 if $name eq 'rPh';
 }
 
 sub _end {
@@ -56,11 +58,12 @@ sub _end {
         push @{ $self->{_data} }, $self->{_buf};
         $self->{_buf} = '';
     }
+    $self->{_is_ph} = 0 if $name eq 'rPh';
 }
 
 sub _char {
     my ($self, $parser, $data) = @_;
-    $self->{_buf} .= $data if $self->{_is_string};
+    $self->{_buf} .= $data if $self->{_is_string} && !$self->{_is_ph};
 }
 
 1;
