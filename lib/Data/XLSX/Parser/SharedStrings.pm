@@ -50,9 +50,9 @@ sub _start {
 
 sub _end {
     my ($self, $parser, $name) = @_;
-    $self->{_is_string} = 0;
 
     if ($name eq 'si') {
+        $self->{_is_string} = 0;
         push @{ $self->{_data} }, $self->{_buf};
         $self->{_buf} = '';
     }
